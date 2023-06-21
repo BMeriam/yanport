@@ -114,8 +114,7 @@ describe('FeatureComponent', () => {
         component.vacuumForm.get('instruction')?.setValue('ADAAADAGA');
         const result = {x: 4, y: 5, orientation: "E"} as Position;
         component.validate();
-        // @ts-ignore
-        expect(component.lastPosition).toEqual(result)
+        expect(component.lastPosition).toEqual(result);
       });
     it('4.1- test position final de (5,5,"N")',
       () => {
@@ -125,8 +124,7 @@ describe('FeatureComponent', () => {
         component.vacuumForm.get('instruction')?.setValue('DADADADAA');
         const result = {x: 5, y: 6, orientation: "N"} as Position;
         component.validate();
-        // @ts-ignore
-        expect(component.lastPosition).toEqual(result)
+        expect(component.lastPosition).toEqual(result);
       });
     it('4.2- test position final de (2,3,"S")',
       () => {
@@ -136,8 +134,18 @@ describe('FeatureComponent', () => {
         component.vacuumForm.get('instruction')?.setValue('DAGADAGAA');
         const result = {x: 0, y: 0, orientation: "S"} as Position;
         component.validate();
-        // @ts-ignore
-        expect(component.lastPosition).toEqual(result)
+        expect(component.lastPosition).toEqual(result);
+      });
+      it('4.3- test- cas d erreur',
+      () => {
+        component.vacuumForm.get('orientation')?.setValue('S');
+        component.vacuumForm.get('xPosition')?.setValue(2);
+        component.vacuumForm.get('yPosition')?.setValue(3);
+        component.vacuumForm.get('instruction')?.setValue('DAGADAGAAA');
+        const result = {x: 0, y: -1, orientation: "S"} as Position;
+        component.validate();
+        expect(component.positionNotValid).toEqual(true);
+        expect(component.lastPosition).toEqual(result);
       });
   });
 });

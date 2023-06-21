@@ -135,7 +135,7 @@ export class VacuumMapComponent {
     }
 
     /**
-   *
+   *@ calcule la nouvelle position et verifie si la position est dans la grille
    * @param finalDirection
    * @private
    */
@@ -154,6 +154,9 @@ export class VacuumMapComponent {
 
     /**
    * cree l'objet des coordonnees du robot
+   * @param xPosition 
+   * @param yPosition 
+   * @param orientation
    */
     public createPositionModel(xPosition : number, yPosition: number, orientation : string): Position {
 
