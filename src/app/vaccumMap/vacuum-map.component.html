@@ -1,0 +1,57 @@
+<form class="example-form" [formGroup]="vacuumForm">
+  <div id="grid">
+    Dimension de la grille
+    <mat-form-field class="margin">
+      <mat-label>X</mat-label>
+      <input matInput formControlName="xGrid" type="number">
+    </mat-form-field>
+    <mat-form-field class="margin">
+      <mat-label>Y</mat-label>
+      <input matInput formControlName="yGrid" type="number">
+    </mat-form-field>
+  </div>
+  <div id="position">
+    Position initiale
+    <mat-form-field class="margin">
+      <mat-label>X</mat-label>
+      <input matInput formControlName="xPosition" type="number">
+    </mat-form-field>
+    <mat-form-field class="margin">
+      <mat-label>Y</mat-label>
+      <input matInput formControlName="yPosition" type="number">
+    </mat-form-field>
+    <mat-form-field class="margin">
+      <mat-label>Orientation</mat-label>
+      <input matInput
+             formControlName="orientation"
+             type=text
+             class="uppercase"
+             (ngModelChange)="checkOrientation($event)">
+    </mat-form-field>
+  </div>
+  <div id="instruction">
+    Instruction
+    <mat-form-field class="margin">
+      <mat-label>Instruction</mat-label>
+      <input matInput formControlName="instruction"
+             type=text
+             (ngModelChange)="checkInstruction($event)"
+             class="uppercase">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary"
+          mat-button type="submit"
+          (click)="validate()"
+          [disabled]="!vacuumForm.valid || clicked">Valider
+  </button>
+  <button mat-raised-button color="accent"
+          [disabled]="!vacuumForm.touched"
+          (click)="resetForm()" style="margin-left: 10px">Vider
+  </button>
+  <div class="result-success" *ngIf="lastPosition && !positionNotValid">
+    <p>Position finale : {{lastPosition.x }} {{lastPosition.y}} {{lastPosition.orientation}}</p></div>
+  <div class="result-error" *ngIf="positionNotValid && lastPosition">
+    <p>Erreur - dépassement du robot de la grille </p>
+   <p> Position finale : {{lastPosition.x }} {{lastPosition.y}} {{lastPosition.orientation}} </p>
+  </div>
+</form>
